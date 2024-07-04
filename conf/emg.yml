@@ -1,0 +1,48 @@
+$include:
+  - conf/base.yml
+
+# Model setup
+DAC.sample_rate: 1000
+DAC.encoder_dim: 64
+DAC.encoder_rates: [2, 2, 3, 4]
+DAC.decoder_dim: 1536
+DAC.decoder_rates: [4, 4, 2, 2, 2, 1]
+
+# Quantization
+DAC.n_codebooks: 2
+DAC.codebook_size: 1024
+DAC.codebook_dim: 8
+DAC.quantizer_dropout: 1.0
+
+batch_size: 12
+val_batch_size: 12
+num_workers: 4
+
+device: cpu
+
+# Data
+
+train/AudioDataset.duration: 0.08
+train/AudioDataset.n_examples: 10000000
+
+val/AudioDataset.duration: 5.0
+val/build_transform.augment_prob: 1.0
+val/AudioDataset.n_examples: 250
+
+test/AudioDataset.duration: 10.0
+test/build_transform.augment_prob: 1.0
+test/AudioDataset.n_examples: 1000
+
+AudioLoader.shuffle: true
+AudioDataset.without_replacement: true
+
+train/build_dataset.folders:
+  emg_raw:
+    - /Users/zaizenkaegyoshi/some/descript-audio-codec/data/emg/train
+val/build_dataset.folders:
+  emg_raw:
+    - /Users/zaizenkaegyoshi/some/descript-audio-codec/data/emg/test
+
+test/build_dataset.folders:
+  emg_raw:
+    - /Users/zaizenkaegyoshi/some/descript-audio-codec/data/emg/test
